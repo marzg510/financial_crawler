@@ -13,7 +13,7 @@ https://console.cloud.google.com/welcome?hl=ja&inv=1&invt=AbwiGQ&project=mortgag
 - 初期化設定
 ```
 gcloud init
-gcloud config set project mortgage-458822
+gcloud config set project PROJECT_ID
 ```
 
 ## Hello World
@@ -34,3 +34,20 @@ functions-framework-ruby --target=hello_get
 ```
 
 - Hello Worldと表示されることを確認
+
+### 単体テスト
+
+```
+bundle exec rspec
+```
+
+### デプロイ
+
+```
+gcloud run deploy ruby-http-function --base-image ruby33 --region asia-northeast1 \
+       --allow-unauthenticated \
+       --source . \
+       --function hello_get
+```
+
+### 結合テスト
