@@ -16,6 +16,23 @@ gcloud init
 gcloud config set project PROJECT_ID
 ```
 
+## Yahoo Top Getter
+
+### セットアップ
+
+```
+cd yahoo_top_getter
+bundle install
+```
+
+### 動作確認
+
+- 以下を実行してブラウザからlocalhost:8000にアクセス
+
+```
+rerun -- functions-framework-ruby --target=yahoo_top_get
+```
+
 ## Hello World
 
 ### セットアップ
