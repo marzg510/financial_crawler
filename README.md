@@ -1,5 +1,5 @@
 # financial_crawler
-crawl the financial(motrgate rate) sites
+crawl the financial(motrgage rate) sites
 
 ## Google Cloud Console
 
