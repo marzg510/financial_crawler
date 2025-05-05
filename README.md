@@ -38,7 +38,7 @@ functions-framework-ruby --target=hello_get
 ### 単体テスト
 
 ```
-bundle exec rspec
+bundle exec rspec spec/unit/
 ```
 
 ### デプロイ
@@ -51,3 +51,7 @@ gcloud run deploy ruby-http-function --base-image ruby33 --region asia-northeast
 ```
 
 ### 結合テスト
+
+```
+bundle exec rspec spec/integration/
+```
