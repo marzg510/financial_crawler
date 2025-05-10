@@ -20,6 +20,20 @@ gcloud init
 gcloud config set project PROJECT_ID
 ```
 
+
+## HelloWorld
+
+### デプロイ
+
+```
+cd helloworld
+gcloud run deploy --source .
+```
+
+
+
+## 以下はRuby版Function
+
 ## Yahoo Top Getter
 
 ### セットアップ
