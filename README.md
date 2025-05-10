@@ -30,6 +30,23 @@ cd helloworld
 gcloud run deploy --source .
 ```
 
+## Playwright
+
+ビルド＆プッシュ
+```
+gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/playwright-sheets
+```
+
+デプロイ
+```
+gcloud run deploy playwright-sheets
+--image gcr.io/YOUR_PROJECT_ID/playwright-sheets
+--platform managed
+--allow-unauthenticated
+```
+
+
+--set-env-vars GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
 
 
 ## 以下はRuby版Function

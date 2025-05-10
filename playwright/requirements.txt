@@ -1,0 +1,4 @@
+playwright==1.44.0
+gspread
+oauth2client
+flask
