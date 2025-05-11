@@ -39,8 +39,8 @@ gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/playwright-sheets
 
 デプロイ
 ```
-gcloud run deploy playwright-sheets
---image gcr.io/YOUR_PROJECT_ID/playwright-sheets
+gcloud run deploy playwright
+--image gcr.io/YOUR_PROJECT_ID/playwright
 --platform managed
 --allow-unauthenticated
 ```
