@@ -1,6 +1,6 @@
 # financial_crawler
 
-crawl the financial(motrgage rate) sites
+crawl the financial(mortgage rate) sites
 
 ## Google Cloud Console
 
