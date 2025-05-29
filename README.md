@@ -1,11 +1,25 @@
 # financial_crawler
-crawl the financial(motrgage rate) sites
+
+crawl the financial(mortgage rate) sites
 
 ## Google Cloud Console
 
 - https://console.cloud.google.com/welcome
 
-GET URL
+## Cloud Run
+
+### Deploy
+
+- https://cloud.google.com/code/docs/vscode/deploy-service?hl=ja
+
+- Command
+
+```bash
+gcloud run deploy financial-crawler --project PROJECTID --image gcr.io/PROJECTID/financial-crawler --client-name "Cloud Code for VS Code" --client-version 2.31.1 --platform managed --region asia-northeast1 --allow-unauthenticated --port 8080 --cpu 1 --memory 512Mi --concurrency 80 --timeout 300 --clear-env-vars
+```
+
+## GET URL
+
 ```
 gcloud run services describe ruby-http-function --region=asia-northeast1  --format=json
 ```
