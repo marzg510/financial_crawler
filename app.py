@@ -3,13 +3,27 @@ A sample Hello World server.
 """
 import os
 from playwright.sync_api import sync_playwright
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 # pylint: disable=C0103
 app = Flask(__name__)
 
 
 @app.route('/')
+def hello():
+    """Return a friendly HTTP greeting."""
+    message = "It's running!, marzg!"
+
+    """Get Cloud Run environment variables."""
+    service = os.environ.get('K_SERVICE', 'Unknown service')
+    revision = os.environ.get('K_REVISION', 'Unknown revision')
+
+    return render_template('index.html',
+        message=message,
+        Service=service,
+        Revision=revision)
+
+@app.route('/exec', methods=['GET'])
 def exec_playwright():
   # playwrightの実装  
   try:    
