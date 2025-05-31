@@ -7,6 +7,7 @@ from flask import Flask, jsonify, render_template
 
 # pylint: disable=C0103
 app = Flask(__name__)
+app.json.ensure_ascii = False  # 日本語を含む文字列をそのまま出力するため
 
 
 @app.route('/')
@@ -25,28 +26,39 @@ def hello():
 
 @app.route('/exec', methods=['GET'])
 def exec_playwright():
-  # playwrightの実装  
-  try:    
-    with sync_playwright() as p:      
-      # Chromium (Web Browser)のインスタンスを作成する      
-      browser = p.chromium.launch(headless=True)        
-      
-      # 新しいページを作成する      
-      page = browser.new_page()        
-      print('page: ', page)     
-      
-      # page.goto() で Yahoo のサイトにアクセス       
-      page.goto('https://www.yahoo.co.jp/')              
+    # playwrightの実装
+    try:
+        with sync_playwright() as p:
+            # Chromium (Web Browser)のインスタンスを作成する
+            browser = p.chromium.launch(headless=True)
 
-      # title tag の値（ページタイトル）を取得し辞書に格納     
-      title = page.title()      
- 
-      # Browser を閉じる      
-      browser.close()
+            # 新しいページを作成する
+            page = browser.new_page()
+            print('page: ', page)
 
-      return jsonify({'title': title}), 200
-  except Exception as e:    
-    return jsonify({'message': str(e)}), 500
+            # page.goto() で Yahoo のサイトにアクセス
+            page.goto('https://www.yahoo.co.jp/')
+
+            # title tag の値（ページタイトル）を取得し辞書に格納
+            title_top = page.title()
+
+            # yahoo shopping のページに遷移
+            page.locator("#Masthead").get_by_role("link", name="ショッピングへ遷移する").click()
+            title_shopping = page.title()
+
+            # Browser を閉じる
+            browser.close()
+
+        return {
+            'top':{
+                'title': title_top
+            },
+            'shopping':{
+                'title': title_shopping
+            }
+        }, 200
+    except Exception as e:
+        return {'message': str(e)}, 500
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
