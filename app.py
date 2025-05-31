@@ -1,6 +1,7 @@
 """
 A sample Hello World server.
 """
+import logging
 import os
 from playwright.sync_api import sync_playwright
 from flask import Flask, jsonify, render_template
@@ -34,6 +35,7 @@ def exec_playwright():
 
             # 新しいページを作成する
             page = browser.new_page()
+            logging.info('page: %s', page)
             print('page: ', page)
 
             # page.goto() で Yahoo のサイトにアクセス
@@ -44,6 +46,7 @@ def exec_playwright():
 
             # yahoo shopping のページに遷移
             page.locator("#Masthead").get_by_role("link", name="ショッピングへ遷移する").click()
+            page.wait_for_load_state()  # ページ遷移後のロード完了を待機
             title_shopping = page.title()
 
             # Browser を閉じる
