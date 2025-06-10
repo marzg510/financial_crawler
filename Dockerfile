@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN pip install -r requirements.txt --root-user-action=ignore
 
 # Playwrightのブラウザバイナリをインストール
 RUN playwright install --with-deps
@@ -17,4 +17,4 @@ RUN playwright install --with-deps
 COPY . .
 
 # Run app.py when the container launches
-ENTRYPOINT ["python", "app.py"]
+# ENTRYPOINT ["python", "app.py"]
