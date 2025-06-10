@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt --root-user-action=ignore
+RUN pip install -r requirements.txt --root-user-action=ignore --no-cache-dir
 
 # Playwrightのブラウザバイナリをインストール
 RUN playwright install --with-deps

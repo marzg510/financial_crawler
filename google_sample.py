@@ -1,5 +1,5 @@
 """
-A sample Yahoo Crawler.
+A sample Google Crawler.
 """
 import logging
 import os
