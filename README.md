@@ -32,7 +32,8 @@ gcloud builds submit --tag asia-northeast1-docker.pkg.dev/mortgage-458822/cloud-
 
 ```shell
 gcloud run jobs deploy test-main-sample-crawler \
-    --command=python3,main_sample.py \
+    --command=python3 \
+    --args=main_sample.py \
     --set-env-vars SLEEP_MS=1000 \
     --image asia-northeast1-docker.pkg.dev/mortgage-458822/cloud-run-source-deploy/financial-crawler-job-image \
     --region asia-northeast1 \
