@@ -31,11 +31,14 @@ gcloud builds submit --tag asia-northeast1-docker.pkg.dev/mortgage-458822/cloud-
 ### デプロイ
 
 ```shell
-gcloud run jobs deploy test-main-sample-crawler \
+gcloud run jobs deploy yahoo-sample \
     --command=python3 \
-    --args=main_sample.py \
+    --args=yahoo_sample.py \
     --set-env-vars SLEEP_MS=1000 \
     --image asia-northeast1-docker.pkg.dev/mortgage-458822/cloud-run-source-deploy/financial-crawler-job-image \
+    --clear-volumes \
+    --add-volume name=gcs1,type=cloud-storage,bucket=financial_crawler \
+    --add-volume-mount volume=gcs1,mount-path=/result \
     --region asia-northeast1
 ```
 
