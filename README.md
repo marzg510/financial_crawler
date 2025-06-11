@@ -17,7 +17,7 @@ docker image build -t financial-crawler-local:latest .
 ### スクリプトのローカル実行、デバッグ
 
 ```shell
-docker run --rm -v ${PWD}:/app -it financial-crawler-local python3 google_sample.py
+docker run --rm -v ${PWD}:/app -v ${PWD}/result:/result -it financial-crawler-local python3 file_save_sample.py
 ```
 
 ## Cloud Run Jobs
@@ -36,14 +36,21 @@ gcloud run jobs deploy test-main-sample-crawler \
     --args=main_sample.py \
     --set-env-vars SLEEP_MS=1000 \
     --image asia-northeast1-docker.pkg.dev/mortgage-458822/cloud-run-source-deploy/financial-crawler-job-image \
-    --region asia-northeast1 \
-    --project=mortgage-458822
+    --region asia-northeast1
+```
+
+#### ボリュームマウント（初回デプロイ時のみ）
+
+```shell
+gcloud run jobs update file-save-sample \
+    --add-volume name=gcs1,type=cloud-storage,bucket=financial_crawler \
+    --add-volume-mount volume=gcs1,mount-path=/result
 ```
 
 ### 実行
 
 ```shell
-gcloud run jobs execute test-main-sample-crawler --region asia-northeast1 --project=mortgage-458822
+gcloud run jobs execute file-save-sample --region asia-northeast1
 ```
 
 ### 確認
