@@ -2,6 +2,13 @@
 
 crawl the financial(mortgage rate) sites
 
+
+## 環境構築
+
+1. Google Cloudのプロジェクトを作成
+2. APIを有効化(#45)
+3. サービスアカウントを作成してキーをダウンロードし、プロジェクトrootにimport-job-account.jsonとして保存
+
 ## Google Cloud Console
 
 - https://console.cloud.google.com/welcome
@@ -17,7 +24,7 @@ docker image build -t financial-crawler-local:latest .
 ### スクリプトのローカル実行、デバッグ
 
 ```shell
-docker run --rm -v ${PWD}:/app -v ${PWD}/result:/result -it financial-crawler-local python3 file_save_sample.py
+docker run --rm -v ${PWD}:/app -v ${PWD}/result:/result -it financial-crawler-local python3 gspread_sample.py
 ```
 
 ## Cloud Run Jobs
