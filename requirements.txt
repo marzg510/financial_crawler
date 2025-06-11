@@ -1,2 +1,4 @@
 playwright==1.52.0
 # debugpy # Required for debugging.
+gspread
+oauth2client

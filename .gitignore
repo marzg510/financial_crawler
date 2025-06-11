@@ -57,3 +57,4 @@ build-iPhoneSimulator/
 .env
 client_secret.json
 deploy-cmd.txt
+import-job-account.json
