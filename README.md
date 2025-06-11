@@ -46,6 +46,12 @@ gcloud run jobs deploy test-main-sample-crawler \
 gcloud run jobs execute test-main-sample-crawler --region asia-northeast1 --project=mortgage-458822
 ```
 
+### 確認
+
+```shell
+gcloud run jobs executions describe test-main-sample-crawler-2r72g --region asia-northeast1
+```
+
 ## Cloud Run
 
 ### Deploy

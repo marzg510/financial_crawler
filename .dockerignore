@@ -2,4 +2,8 @@
 .vscode
 .idea
 .readmes
-deploy-command.txt
+deploy-cmd.txt
+.gcloudignore
+.git
+.devcontainer
+.gitignore

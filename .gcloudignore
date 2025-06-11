@@ -1,0 +1,6 @@
+#!include:.dockerignore
+.devcontainer
+.vscode
+client_secret.json
+deploy-cmd.txt
+test_content.sh
