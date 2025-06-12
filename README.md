@@ -24,7 +24,8 @@ docker image build -t financial-crawler-local:latest .
 ### スクリプトのローカル実行、デバッグ
 
 ```shell
-docker run --rm -v ${PWD}:/app -v ${PWD}/result:/result -it financial-crawler-local python3 gspread_sample.py
+docker run --rm -v ${PWD}:/app -v ${PWD}/result:/result -it financial-crawler-local python3 sample_jobs/yahoo_sample.py
+docker run --rm -v ${PWD}:/app -v ${PWD}/result:/result -it financial-crawler-local scrapy crawl yahoo_example -L INFO
 ```
 
 ## Cloud Run Jobs
@@ -37,24 +38,33 @@ gcloud builds submit --tag asia-northeast1-docker.pkg.dev/mortgage-458822/cloud-
 
 ### デプロイ
 
+#### Scrapy
+
+```shell
+gcloud run jobs deploy yahoo-scrapy-example \
+    --command=scrapy,crawl \
+    --args=yahoo_example \
+    --image asia-northeast1-docker.pkg.dev/mortgage-458822/cloud-run-source-deploy/financial-crawler-job-image \
+    --clear-volumes \
+    --add-volume name=gcs1,type=cloud-storage,bucket=financial_crawler \
+    --add-volume-mount volume=gcs1,mount-path=/result \
+    --execute-now \
+    --region asia-northeast1
+```
+
+#### Python
+
 ```shell
 gcloud run jobs deploy yahoo-sample \
     --command=python3 \
-    --args=yahoo_sample.py \
+    --args=sample_jobs/yahoo_sample.py \
     --set-env-vars SLEEP_MS=1000 \
     --image asia-northeast1-docker.pkg.dev/mortgage-458822/cloud-run-source-deploy/financial-crawler-job-image \
     --clear-volumes \
     --add-volume name=gcs1,type=cloud-storage,bucket=financial_crawler \
     --add-volume-mount volume=gcs1,mount-path=/result \
+    --execute-now \
     --region asia-northeast1
-```
-
-#### ボリュームマウント（初回デプロイ時のみ）
-
-```shell
-gcloud run jobs update file-save-sample \
-    --add-volume name=gcs1,type=cloud-storage,bucket=financial_crawler \
-    --add-volume-mount volume=gcs1,mount-path=/result
 ```
 
 ### 実行
